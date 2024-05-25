@@ -29,6 +29,13 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
 
+//El carácter "*" indica que este manejador debe aplicarse a todas las rutas que no hayan sido previamente definidas por otros manejadores get
+app.get("*", (req, res) => {
+  //__dirname: directorio del script actual
+  //todo: indica que se enviará el archivo index.html al directorio del script.
+  res.sendFile(__dirname, "/public/index.html");
+});
+
 //LISTEN REQUESTS
 app.listen(process.env.PORT, () => {
   console.log(`servidor corriendo ${process.env.PORT}`);
