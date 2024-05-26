@@ -1,5 +1,7 @@
 const express = require("express");
 const { dbConnection } = require("./database/config");
+
+const path = require("path");
 var cors = require("cors");
 
 //todo: Carga las variables de entorno desde un archivo '.env'
@@ -29,11 +31,9 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
 
-//El carácter "*" indica que este manejador debe aplicarse a todas las rutas que no hayan sido previamente definidas por otros manejadores get
+// Maneja todas las rutas que no sean definidas explícitamente
 app.get("*", (req, res) => {
-  //__dirname: directorio del script actual
-  //todo: indica que se enviará el archivo index.html al directorio del script.
-  res.sendFile(__dirname, "/public/index.html");
+  res.sendFile(path.join(__dirname, "build", "/public/index.html"));
 });
 
 //LISTEN REQUESTS
