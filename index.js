@@ -33,7 +33,7 @@ app.use("/api/events", require("./routes/events"));
 
 // Maneja todas las rutas que no sean definidas explícitamente
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "/public/index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 //LISTEN REQUESTS
